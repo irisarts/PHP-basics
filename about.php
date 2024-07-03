@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="css/stylesheet.css />
     <ul class="menu">
         <li><a href="home.php">Home</a></li>
         <li><a href="about.php">About</a></li>

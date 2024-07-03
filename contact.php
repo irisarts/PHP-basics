@@ -2,7 +2,7 @@
 <html>
   <body>
     <main>
-  <link rel="stylesheet" href="stylesheet.css" />
+  <link rel="stylesheet" href="css/stylesheet.css" />
 
   <ul class="menu">
         <li><a href="home.php">Home</a></li>

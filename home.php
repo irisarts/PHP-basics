@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <?php
+    <!-- <?php
     echo "hello world"
-    ?>
+    ?> -->
     <div class="container">
     
     <ul class="menu">
@@ -13,7 +13,7 @@
       </ul>
       
       <title>HOME</title>
-      <link rel="stylesheet" href="stylesheet.css" />
+      <link rel="stylesheet" href="css/stylesheet.css" />
       <h1>Welkom op mijn pagina</h1>
       <p>
         Hallo en welkom! Fijn dat je er bent. Op deze pagina vind je alles wat
