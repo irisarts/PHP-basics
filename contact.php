@@ -16,13 +16,13 @@
 
   <form action="includes/formhandler.php" method="POST">
     <label for="naam">Naam: </label>
-    <input type="text" name="naam" /><br>
+    <input required type="text" name="naam" /><br>
 
     <label for="email">E-mail: </label>
-    <input type="email" name="email" /><br>
+    <input required type="email" name="email" /><br>
 
     <label for="bericht">Bericht: </label>
-    <textarea type="text" name="bericht" rows="8"></textarea><br>
+    <textarea required type="text" name="bericht" rows="8"></textarea><br>
 
     <button type="submit">Submit</button>
   </form>
