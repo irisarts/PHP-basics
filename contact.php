@@ -14,7 +14,7 @@
 
   <h1>CONTACT</h1>
 
-  <form action="../formhandler.php" method="POST">
+  <form action="includes/formhandler.php" method="POST">
     <label for="naam">Naam: </label>
     <input type="text" name="naam" /><br>
 
