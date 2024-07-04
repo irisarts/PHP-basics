@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = htmlspecialchars($_POST["username"]);
+    $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
 
 
@@ -17,7 +17,7 @@ $file = fopen('../users/users.txt', 'r');
         if ($email == $userEmail && $password == $userPassword) {
             $_SESSION['name'] = $name;
             fclose($file);
-            header('Location: ../index.php');
+            header('Location: ../home.php');
             exit();
         }
     }
