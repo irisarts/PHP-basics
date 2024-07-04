@@ -1,35 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <main>
-  <link rel="stylesheet" href="css/stylesheet.css" />
+<?php
+include 'functions.php';
 
-  <ul class="menu">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact</a></li>
-      </ul>
+$title = "CONTACT";
 
-  <title>CONTACT</title>
+useHeader($title);
+useNavbar();
 
-  <h1>CONTACT</h1>
+echo '<main>';
+echo '<h1>Contact</h1>';
 
-  <form action="includes/formhandler.php" method="POST">
-    <label for="naam">Naam: </label>
-    <input required type="text" name="naam" /><br>
+echo '<form action="includes/formhandler.php" method="POST">';
+echo '    <label for="naam">Naam: </label>';
+echo '    <input required type="text" name="naam" /><br>';
 
-    <label for="email">E-mail: </label>
-    <input required type="email" name="email" /><br>
+echo '    <label for="email">E-mail: </label>';
+echo '    <input required type="email" name="email" /><br>';
 
-    <label for="bericht">Bericht: </label>
-    <textarea required type="text" name="bericht" rows="8"></textarea><br>
+echo '    <label for="bericht">Bericht: </label>';
+echo '    <textarea required type="text" name="bericht" rows="8"></textarea><br>';
 
-    <button type="submit">Submit</button>
-  </form>
+echo '    <button type="submit">Submit</button>';
+echo '</form>';
 
-  <footer>
-    <p>&copy; 2024, Author: Iris Arts</p>
-  </footer>
-</main>
-</body>
-</html>
+echo '</main>';
+
+useFooter();
+?>
