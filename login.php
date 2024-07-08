@@ -1,7 +1,24 @@
 <?php
 include 'functions.php';
 
-$title = "Inloggen";
+$inlogFormulier = [
+    'title'        => 'Signup',
+    'page'      => 'login',
+    'fields'    => [
+        'l_email' => [
+            'label'    => 'Your e-mail',
+            'type'    => 'email'
+        ],
+        'l_pass' => [
+            'label'    => 'Your password',
+            'type'    => 'password'
+        ]
+    ],
+    'submittxt' => 'Signin'
+];    
+
+
+$title = $inlogFormulier['title'];
 useHeader($title);
 
 if (isset($_GET['error'])) {
@@ -12,17 +29,31 @@ if (isset($_GET['error'])) {
         echo "<p>Ongeldige inloggegevens. Probeer het opnieuw.</p>";
     }
 }
-
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    echo "<p>Success! You have logged in.</p>";
+}
 ?>
 
-<h1>Inloggen</h1>
 
-<form action="includes/formhandlerLogin.php" method="POST">
-    <label for="email">Email: </label>
-    <input required type="email" name="email" id="email" /><br>
-    <label for="password">Wachtwoord: </label>
-    <input required type="password" name="password" id="password" autocomplete="current-password"/><br>
-    <button type="submit">Inloggen</button>
+<h1><?php echo htmlspecialchars($inlogFormulier['title']); ?></h1>
+<form action="includes/formhandlerLogin.php" method="post">
+    <?php foreach ($inlogFormulier['fields'] as $name => $field): ?>
+        <label for="<?php echo htmlspecialchars($name); ?>"><?php echo htmlspecialchars($field['label']); ?>:</label>
+        <input required type="<?php echo htmlspecialchars($field['type']); ?>" name="<?php echo htmlspecialchars($name); ?>" id="<?php echo htmlspecialchars($name); ?>" /><br>
+    <?php endforeach; ?>
+    <button type="submit"><?php echo htmlspecialchars($inlogFormulier['submittxt']); ?></button>
 </form>
 
 <?php useFooter(); ?>
+
+
+
+<!-- 
+<h1>Inloggen</h1>
+
+<form action="includes/formhandlerLogin.php" method="GET">
+    <input type="email" name="email" placeholder="email" autocomplete="email"><br>
+    <input type="password" name="password" placeholder="password" autocomplete="off">
+<br>
+    <button type="submit">Inloggen</button>
+</form> -->

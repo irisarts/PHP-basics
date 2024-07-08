@@ -1,32 +1,31 @@
 <?php 
-
 include 'functions.php';
 
-         $registratieFormulier = [
-             'title'        => 'Registration',
-             'page'      => 'register',
-             'fields'    => [
-                 'r_name' => [
-                     'label'    => 'Username',
-                     'type'    => 'text'
-                 ],
-                 'r_email' => [
-                     'label'    => 'E-mail',
-                     'type'    => 'email'
-                 ],
-                 'r_pass' => [
-                     'label'    => 'Password',
-                     'type'    => 'password'
-                 ],
-                 'r_pass_repeat' => [
-                     'label'    => 'Repeat the password',
-                     'type'    => 'password'
-                 ]
-             ],
-             'submittxt' => 'Singup'
-         ];   
+$registratieFormulier = [
+    'title'    => 'Registration',
+    'page'     => 'register',
+    'fields'   => [
+        'username' => [
+            'label' => 'Username',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'E-mail',
+            'type'  => 'email'
+        ],
+        'pwd' => [
+            'label' => 'Password',
+            'type'  => 'password'
+        ],
+        'repeatPwd' => [
+            'label' => 'Repeat the password',
+            'type'  => 'password'
+        ]
+    ],
+    'submittxt' => 'Signup'
+];   
 
-         $title = $registratieFormulier['title'];
+$title = $registratieFormulier['title'];
 useHeader($title);
 
 if (isset($_GET['error'])) {
@@ -45,9 +44,9 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 
 <h1><?php echo htmlspecialchars($registratieFormulier['title']); ?></h1>
 <form action="includes/formhandlerRegister.php" method="POST">
-<?php foreach ($registratieFormulier['fields'] as $name => $field): ?>
+    <?php foreach ($registratieFormulier['fields'] as $name => $field): ?>
         <label for="<?php echo htmlspecialchars($name); ?>"><?php echo htmlspecialchars($field['label']); ?>:</label>
-        <input required type="<?php echo htmlspecialchars($field['type']); ?>" name="<?php echo htmlspecialchars($name); ?> id="<?php echo htmlspecialchars($name); ?>" /><br>
+        <input required type="<?php echo htmlspecialchars($field['type']); ?>" name="<?php echo htmlspecialchars($name); ?>" id="<?php echo htmlspecialchars($name); ?>" /><br>
     <?php endforeach; ?>
     <button type="submit"><?php echo htmlspecialchars($registratieFormulier['submittxt']); ?></button>
 </form>
