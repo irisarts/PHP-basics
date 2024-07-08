@@ -1,0 +1,9 @@
+INSERT INTO users (username, email, pwd) VALUES ('Jan Smit', 'jan.smit@live.nl', 'jantje123');
+\
+
+// selecting both tables and combine the data and show it
+SELECT * FROM users INNER JOIN comments ON users.id = comments.users_id;
+// show all the data together
+SELECT * FROM users LEFT JOIN comments ON users.id = comments.users_id;
+// ONLY THE ONES WITH comments
+SELECT * FROM users RIGHT JOIN comments ON users.id = comments.users_id;
