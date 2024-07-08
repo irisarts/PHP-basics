@@ -7,15 +7,15 @@ include 'functions.php';
              'page'      => 'register',
              'fields'    => [
                  'r_name' => [
-                     'label'    => 'Uw naam',
+                     'label'    => 'Username',
                      'type'    => 'text'
                  ],
                  'r_email' => [
-                     'label'    => 'Uw emailadres',
+                     'label'    => 'Your e-mail',
                      'type'    => 'email'
                  ],
                  'r_pass' => [
-                     'label'    => 'Uw wachtwoord',
+                     'label'    => 'Password',
                      'type'    => 'password'
                  ],
                  'r_pass_repeat' => [
