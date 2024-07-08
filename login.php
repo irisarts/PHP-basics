@@ -45,15 +45,3 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 </form>
 
 <?php useFooter(); ?>
-
-
-
-<!-- 
-<h1>Inloggen</h1>
-
-<form action="includes/formhandlerLogin.php" method="GET">
-    <input type="email" name="email" placeholder="email" autocomplete="email"><br>
-    <input type="password" name="password" placeholder="password" autocomplete="off">
-<br>
-    <button type="submit">Inloggen</button>
-</form> -->

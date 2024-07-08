@@ -2,9 +2,10 @@
 session_start(); // Start the session
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = htmlspecialchars(trim($_POST["email"]));
-    $pwd = htmlspecialchars(trim($_POST["pwd"]));
+    $email = htmlspecialchars(trim($_POST["l_email"]));
+    $pwd = htmlspecialchars(trim($_POST["l_pass"]));
 
+    // Debugging: Check if data is received
     echo "Email: " . $email . "<br>";
     echo "Password: " . $pwd . "<br>";
 
