@@ -3,7 +3,7 @@
 include 'functions.php';
 
          $registratieFormulier = [
-             'title'        => 'Registratie',
+             'title'        => 'Registration',
              'page'      => 'register',
              'fields'    => [
                  'r_name' => [
@@ -11,7 +11,7 @@ include 'functions.php';
                      'type'    => 'text'
                  ],
                  'r_email' => [
-                     'label'    => 'Your e-mail',
+                     'label'    => 'E-mail',
                      'type'    => 'email'
                  ],
                  'r_pass' => [
@@ -19,11 +19,11 @@ include 'functions.php';
                      'type'    => 'password'
                  ],
                  'r_pass_repeat' => [
-                     'label'    => 'Herhaal uw wachtwoord',
+                     'label'    => 'Repeat the password',
                      'type'    => 'password'
                  ]
              ],
-             'submittxt' => 'Registreer'
+             'submittxt' => 'Singup'
          ];   
 
          $title = $registratieFormulier['title'];
