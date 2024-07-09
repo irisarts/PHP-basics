@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $name = $_POST['name'];
     $email = $_POST['email'];
     $pwd = $_POST['pwd'];
     $repeatPwd = $_POST['repeatPwd'];
@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         require_once "dbh.inc.php";
 
-        $query = "INSERT INTO users (username, email, pwd) VALUES (:username, :email, :pwd);";
+        $query = "INSERT INTO users (name, email, pwd) VALUES (:name, :email, :pwd);";
 
         $stmt = $pdo->prepare($query);
 
-        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":name", $name);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":pwd", $pwd);
 

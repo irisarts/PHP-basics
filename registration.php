@@ -5,8 +5,8 @@ $registratieFormulier = [
     'title'    => 'Registration',
     'page'     => 'register',
     'fields'   => [
-        'username' => [
-            'label' => 'Username',
+        'name' => [
+            'label' => 'Name',
             'type'  => 'text'
         ],
         'email' => [
