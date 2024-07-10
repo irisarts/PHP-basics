@@ -7,6 +7,12 @@ useHeader($title);
 useNavbar();
 
 
+try {
+    //code...
+} catch (\Throwable $th) {
+    //throw $th;
+}
+
 
 useFooter();
 ?>

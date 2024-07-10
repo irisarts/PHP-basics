@@ -22,13 +22,15 @@ function useFooter() {
 }
 
 function useNavbar() {
-    echo '<nav>';
+    echo '<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">';
+    echo '<nav class="collapse navbar-collapse nav-buttons">';
     echo '    <ul>';
     echo '        <li><a href="home.php">Home</a></li>';
     echo '        <li><a href="about.php">About</a></li>';
     echo '        <li><a href="shop.php">Webshop</a></li>';
     echo '        <li><a href="contact.php">Contact</a></li>';
     echo '    </ul>';
+    echo '</nav>';
     echo '</nav>';
 }
 
