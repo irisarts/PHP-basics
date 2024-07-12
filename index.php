@@ -1,22 +1,43 @@
 <?php
+session_start();
 include 'functions.php';
 
-$title = "Home";
-useHeader($title);
+$dsn = "mysql:host=localhost;dbname=myfirstdb";
+$dbusername = "druif";
+$dbpassword = "98052001A!";
+
+try {
+    $pdo = new PDO($dsn, $dbusername, $dbpassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (\PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+useHeader();
+useNavbar("My website");
+
+
+// switch () {
+//     case "Home":
+//         showHome();
+//       break;
+//     case "About":
+//         showAbout();      
+//       break;
+//     case label3:
+//       //code block
+//       break;
+//     default:
+//     showHome();
+//     break;
+//   }
+
+showHome();
+showAbout();
+showContactForm();
+useFooter();
+
+
+
+
 ?>
-
-<h1>Welkom</h1>
-
-<nav>
-    <ul>
-        <li><a href="index.php">Home</a></li>
-        <?php if (isset($_SESSION['name'])): ?>
-            <li><a href="logout.php">Logout [<?php echo $_SESSION['name']; ?>]</a></li>
-        <?php else: ?>
-            <li><a href="login.php">Inloggen</a></li>
-            <li><a href="registration.php">Registreren</a></li>
-        <?php endif; ?>
-    </ul>
-</nav>
-
-<?php useFooter(); ?>

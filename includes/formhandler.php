@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
 if (empty($naam)) {
     exit();
-    header("Location: ../home.php");
+    header("Location: ../index.php");
 }
 
  echo "These are the data that the user submitted: ";
@@ -21,8 +21,7 @@ if (empty($naam)) {
  echo $bericht;
 
 
- //sends user back to the home page
- header("Location: ../home.php");
+ header("Location: ../index.php");
 } else {
-    header("Location: ../home.php"); 
+    header("Location: ../index.php"); 
 }
