@@ -27,10 +27,10 @@ function useNavbar($title)
     echo '<nav class="navbar">
             <h1>' . $title . '</h1>
         <ul>
-            <li><a href="home.php">Home</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="shop.php">Webshop</a></li>
-            <li><a href="contact.php">Contact</a></li>
+            <li><a href="index.php?page=home">Home</a></li>
+            <li><a href="index.php?page=about">About</a></li>
+            <li><a href="index.php?page=shop">Webshop</a></li>
+            <li><a href="index.php?page=contact">Contact</a></li>
         </ul>
     </nav>';
 }
@@ -52,7 +52,7 @@ function showAbout() {
     </ul>';
 }
 
-function showWebshop () {
+function showWebshop() {
 
 }
 

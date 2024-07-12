@@ -12,29 +12,30 @@ try {
 } catch (\PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 useHeader();
 useNavbar("My website");
 
 
-// switch () {
-//     case "Home":
-//         showHome();
-//       break;
-//     case "About":
-//         showAbout();      
-//       break;
-//     case label3:
-//       //code block
-//       break;
-//     default:
-//     showHome();
-//     break;
-//   }
+switch ($page) {
+    case "home":
+        showHome();
+      break;
+    case "about":
+        showAbout();      
+      break;
+    case "shop":
+        showWebshop();
+      break;
+      case "contact":
+        showContactForm();
+        break;
+    default:
+        showHome();
+        break;
+  }
 
-showHome();
-showAbout();
-showContactForm();
 useFooter();
 
 
