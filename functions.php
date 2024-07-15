@@ -30,9 +30,14 @@ function useNavbar($title)
             <li><a href="index.php?page=home">Home</a></li>
             <li><a href="index.php?page=about">About</a></li>
             <li><a href="index.php?page=shop">Webshop</a></li>
-            <li><a href="index.php?page=contact">Contact</a></li>
-        </ul>
-    </nav>';
+            <li><a href="index.php?page=contact">Contact</a></li>';
+            if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {  
+        echo '<li><a href="index.php?page=login">Login</a></li>';
+            } else {
+        echo '<li><a href="index.php?page=logout">Logout</a></li>';
+            }
+        echo '</ul>
+            </nav>';
 }
 
 
@@ -53,7 +58,12 @@ function showAbout() {
 }
 
 function showWebshop() {
-
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header('Location: index.php?page=login');
+        exit;
+    }
+    echo "<h1>Webshop</h1>";
+    echo "<p>Welcome to our webshop.</p>";
 }
 
 function showContactForm() {
@@ -95,19 +105,32 @@ function showFields(array $fields)
  }
  
 function generateLogin () {
-    echo '<div class="modal-content">
-    <span class="close">&times;</span>
-    <form action="includes/formhandlerLogin.php" method="post">';
-    if (isset($_GET['error'])) {
-        $_GET['error'];
-     }
-    echo '<label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Password"><br> 
-      <button type="submit">Login</button>
-    </form>
-  </div>';    
+    echo '<form action="index.php?page=login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Login</button>
+          </form>';
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $username = $_POST['username'];
+        $pwd = $_POST['password'];
+}
+
+if ($username === 'user' && $pwd === 'pass') {
+    $_SESSION['loggedin'] = true;
+    header('Location: index.php?page=shop');
+    exit;
+} else {
+    echo '<p>Invalid credentials. Please try again.</p>';
+}
+}
+
+function generateLogout() {
+    session_destroy();
+    header('Location: index.php?page=home');
+    exit;
 }
 
 function generateRegistration() {

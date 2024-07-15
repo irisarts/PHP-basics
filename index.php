@@ -19,22 +19,25 @@ useNavbar("My website");
 
 
 switch ($page) {
-    case "home":
+    case 'home':
         showHome();
-      break;
-    case "about":
-        showAbout();      
-      break;
-    case "shop":
+        break;
+    case 'about':
+        showAbout();
+        break;
+    case 'shop':
         showWebshop();
-      break;
-      case "contact":
+        break;
+    case 'contact':
         showContactForm();
+        break;
+    case 'login':
+        generateLogin();
         break;
     default:
         showHome();
         break;
-  }
+}
 
 useFooter();
 
