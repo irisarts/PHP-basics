@@ -34,6 +34,9 @@ switch ($page) {
     case 'login':
         generateLogin();
         break;
+    case 'logout':
+        logout();
+        break;
     default:
         showHome();
         break;

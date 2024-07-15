@@ -80,59 +80,40 @@ function showContactForm() {
     </form>
     </main>';
 }
+function generateLogin() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = $_POST['email'];
+        $pwd = $_POST['pwd'];
 
-function showFields(array $fields)
- {
-     foreach ($fields as $fieldname => $fieldinfo)
-     {
-         echo '<label for="'.$fieldname.'">'
-             .$fieldinfo['label']
-             .'</label>'
-             .PHP_EOL;
-         switch ($fieldinfo['type'])
-         {
-             case 'textarea':
-                 echo '<textarea name="'.$fieldname.'"></textarea>'.PHP_EOL;
-                 break;
-             default:
-                 echo '<input' 
-                     .' name="'.$fieldname.'"' 
-                     .' type="'.$fieldinfo['type'].'"'
-                     .' />'
-                     .PHP_EOL;        
-         }        
-     }    
- }
- 
-function generateLogin () {
+        global $pdo; 
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND pwd = :pwd");
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':pwd', $pwd);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email;
+            header('Location: index.php?page=shop');
+            exit;
+        } else {
+            echo '<p>Invalid credentials. Please try again.</p>';
+        }
+    }
+
+    echo '<h1>Login</h1>';
     echo '<form action="index.php?page=login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="pwd">Password:</label>
+            <input type="pwd" id="pwd" name="pwd" required><br>
             <button type="submit">Login</button>
           </form>';
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $username = $_POST['username'];
-        $pwd = $_POST['password'];
 }
 
-if ($username === 'user' && $pwd === 'pass') {
-    $_SESSION['loggedin'] = true;
-    header('Location: index.php?page=shop');
-    exit;
-} else {
-    echo '<p>Invalid credentials. Please try again.</p>';
-}
-}
-
-function generateLogout() {
+function logout() {
     session_destroy();
     header('Location: index.php?page=home');
     exit;
-}
-
-function generateRegistration() {
-
 }
