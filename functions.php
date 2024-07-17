@@ -1,6 +1,5 @@
 <?php
-function useHeader()
-{
+function useHeader() {
     echo '<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -12,8 +11,7 @@ function useHeader()
     <div class="container">';
 }
 
-function useFooter()
-{
+function useFooter() {
     echo '<footer>
         <p>&copy; 2024, Author: Iris Arts</p>
     </footer>
@@ -22,22 +20,29 @@ function useFooter()
     </html>';
 }
 
-function useNavbar($title)
-{
+function useNavbar($title) {
     echo '<nav class="navbar">
             <h1>' . $title . '</h1>
         <ul>
-            <li><a href="index.php?page=home">Home</a></li>
-            <li><a href="index.php?page=about">About</a></li>
-            <li><a href="index.php?page=shop">Webshop</a></li>
-            <li><a href="index.php?page=contact">Contact</a></li>';
-            if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {  
-        echo '<li><a href="index.php?page=login">Login</a></li>';
-            } else {
-        echo '<li><a href="index.php?page=logout">Logout</a></li>';
-            }
-        echo '</ul>
-            </nav>';
+            <li>' . generateNavForm('Home', 'home') . '</li>
+            <li>' . generateNavForm('About', 'about') . '</li>
+            <li>' . generateNavForm('Webshop', 'shop') . '</li>
+            <li>' . generateNavForm('Contact', 'contact') . '</li>';
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        echo '<li>' . generateNavForm('Login', 'login') . '</li>';
+    } else {
+        echo '<li>' . generateNavForm('Logout', 'logout') . '</li>';
+    }
+    echo '</ul>
+          </nav>';
+}
+
+function generateNavForm($label, $page)
+{
+    return '<form method="POST" style="display:inline;">
+                <input type="hidden" name="page" value="' . $page . '">
+                <button type="submit">' . $label . '</button>
+            </form>';
 }
 
 
@@ -59,7 +64,8 @@ function showAbout() {
 
 function showWebshop() {
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header('Location: index.php?page=login');
+        echo '<p>You need to log in to access the webshop. Redirecting...</p>';
+        header('Refresh: 2; URL=index.php?page=login'); 
         exit;
     }
     echo "<h1>Webshop</h1>";
@@ -81,15 +87,16 @@ function showContactForm() {
     </main>';
 }
 function generateLogin() {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = $_POST['email'];
-        $pwd = $_POST['pwd'];
+    global $pdo;
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = $_POST['email'] ?? null;
+        $pwd = $_POST['pwd'] ?? null;
+
+        if ($email && $pwd) {
         global $pdo; 
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND pwd = :pwd");
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':pwd', $pwd);
-        $stmt->execute();
+        $stmt->execute(['email' => $email, 'pwd' => $pwd]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
@@ -100,6 +107,9 @@ function generateLogin() {
         } else {
             echo '<p>Invalid credentials. Please try again.</p>';
         }
+        } else {
+            echo '<p>Email or password is missing.</p>';
+        }
     }
 
     echo '<h1>Login</h1>';
@@ -107,13 +117,13 @@ function generateLogin() {
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br>
             <label for="pwd">Password:</label>
-            <input type="pwd" id="pwd" name="pwd" required><br>
+            <input type="password" id="pwd" name="pwd" required><br>
             <button type="submit">Login</button>
           </form>';
 }
 
 function logout() {
     session_destroy();
-    header('Location: index.php?page=home');
+    header('Location: index.php');
     exit;
 }

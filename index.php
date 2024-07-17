@@ -9,10 +9,10 @@ $dbpassword = "98052001A!";
 try {
     $pdo = new PDO($dsn, $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (\PDOException $e) {
+} catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+$page = $_POST['page'] ?? $_GET['page'] ?? 'home';
 
 useHeader();
 useNavbar("My website");
@@ -43,8 +43,3 @@ switch ($page) {
 }
 
 useFooter();
-
-
-
-
-?>
