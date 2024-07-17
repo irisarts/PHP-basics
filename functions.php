@@ -37,9 +37,8 @@ function useNavbar($title) {
           </nav>';
 }
 
-function generateNavForm($label, $page)
-{
-    return '<form method="POST" style="display:inline;">
+function generateNavForm($label, $page) {
+    return '<form method="POST">
                 <input type="hidden" name="page" value="' . $page . '">
                 <button type="submit">' . $label . '</button>
             </form>';
