@@ -86,7 +86,16 @@ function showContactForm($username = '', $email = '', $comment_msg = '', $error 
     <textarea required type="text" name="comment_msg" rows="8">' . htmlspecialchars($comment_msg) . '</textarea><br>
     <button type="submit">Submit</button>
     </form>
-    </main>';
+    </main>
+    
+    <div id="thankYouModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Thank you for your submission!</p>
+            </div>
+          </div>
+          
+          ';
 }
 
 

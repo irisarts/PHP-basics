@@ -30,7 +30,7 @@ try {
     $stmt->execute();
     
     echo "The data is submitted correctly!";
-    header("Location: ../index.php?page=home");
+    header("Location: ../index.php?page=contact#thankYouModal");
     exit();
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
