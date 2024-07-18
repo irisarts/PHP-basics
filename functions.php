@@ -71,20 +71,25 @@ function showWebshop() {
     echo "<p>Welcome to our webshop.</p>";
 }
 
-function showContactForm() {
+function showContactForm($username = '', $email = '', $comment_msg = '', $error = '') {
     echo '<main>
-    <h1>Contact</h1>
-    <form action="includes/formhandler.php" method="POST">
-    <label for="naam">Naam: </label>
-    <input required type="text" name="naam" /><br>
+    <h1>Contact</h1>';
+    if ($error) {
+        echo '<p style="color:red;">' . htmlspecialchars($error) . '</p>';
+    }
+    echo '<form action="includes/formhandler.php" method="POST">
+    <label for="username">Naam: </label>
+    <input required type="text" name="username" value="' . htmlspecialchars($username) . '"/><br>
     <label for="email">E-mail: </label>
-    <input required type="email" name="email" /><br>
-    <label for="bericht">Bericht: </label>
-    <textarea required type="text" name="bericht" rows="8"></textarea><br>
+    <input required type="email" name="email" value="' . htmlspecialchars($email) . '"/><br>
+    <label for="comment_msg">Message: </label>
+    <textarea required type="text" name="comment_msg" rows="8">' . htmlspecialchars($comment_msg) . '</textarea><br>
     <button type="submit">Submit</button>
     </form>
     </main>';
 }
+
+
 function generateLogin() {
     global $pdo;
 

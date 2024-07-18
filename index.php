@@ -29,7 +29,11 @@ switch ($page) {
         showWebshop();
         break;
     case 'contact':
-        showContactForm();
+        $name = $_GET['name'] ?? '';
+        $email = $_GET['email'] ?? '';
+        $comment_msg = $_GET['comment_msg'] ?? '';
+        $error = $_GET['error'] ?? '';
+        showContactForm($name, $email, $comment_msg, $error);
         break;
     case 'login':
         generateLogin();
