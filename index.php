@@ -38,6 +38,9 @@ switch ($page) {
     case 'login':
         generateLogin();
         break;
+    case 'register':
+        generateRegistration();
+        break;
     case 'logout':
         logout();
         break;

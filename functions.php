@@ -30,6 +30,7 @@ function useNavbar($title) {
             <li>' . generateNavForm('Contact', 'contact') . '</li>';
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         echo '<li>' . generateNavForm('Login', 'login') . '</li>';
+        echo '<li>' . generateNavForm('Register', 'register') . '</li>';
     } else {
         echo '<li>' . generateNavForm('Logout', 'logout') . '</li>';
     }
@@ -38,10 +39,7 @@ function useNavbar($title) {
 }
 
 function generateNavForm($label, $page) {
-    return '<form method="POST">
-                <input type="hidden" name="page" value="' . $page . '">
-                <button type="submit">' . $label . '</button>
-            </form>';
+    return '<a href="index.php?page=' . $page . '">' . $label . '</button></a>';
 }
 
 
@@ -132,6 +130,57 @@ function generateLogin() {
             <label for="pwd">Password:</label>
             <input type="password" id="pwd" name="pwd" required><br>
             <button type="submit">Login</button>
+          </form>';
+}
+
+function generateRegistration() {
+    global $pdo;
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $name = $_post['name'] ?? null;
+        $email = $_post['email'] ?? null;
+        $pwd = $_post['pwd'] ?? null;
+        $pwdConfirm = $_post['pwdConfirm'] ?? null;
+
+        $error = '';
+
+        if (!$name || !$email || !$pwd || !$pwdConfirm) {
+            $error = 'All fields are required!';
+        } elseif ($pwd !== $pwdConfirm) {
+            $error = 'Passwords do not match.';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = 'This needs to be an email.';
+        } else {
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->execute(['email' => $email]);
+            if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+                $error = 'Email is already registered.';
+            }
+    }
+
+    if (!$error) {
+        $hashedPassword = password_hash($pwd, PASSWORD_BCRYPT);
+
+        $stmt = $pdo->prepare("INSERT INTO users (name, email, pwd) VALUES (:name, :email, :pwd)");
+            $stmt->execute(['name' => $name, 'email' => $email, 'password' => $hashedPassword]);
+            echo '<p>Registration successful! You can now <a href="index.php?page=login">login</a>.</p>';
+            return;
+        } else {
+            echo '<p style="color:red;">' . htmlspecialchars($error) . '</p>';
+        }
+    }
+
+    echo '<h1>Register</h1>';
+    echo '<form action="index.php?page=register" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" required><br>
+            <label for="pwdConfirm">Confirm Password:</label>
+            <input type="password" id="pwdConfirm" name="pwdConfirm" required><br>
+            <button type="submit">Register</button>
           </form>';
 }
 
